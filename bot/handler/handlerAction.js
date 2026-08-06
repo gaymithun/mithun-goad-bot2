@@ -40,8 +40,8 @@ if (!approvedtid.approved.includes(event.threadID)) return;
 			case "message_reply":
 			case "message_unsend":
 				onFirstChat();
-				onChat();
 				onStart();
+				onChat();
 				onReply();
 				break;
 			case "event":
