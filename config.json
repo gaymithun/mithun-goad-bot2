@@ -81,7 +81,6 @@
       "enable": false,
       "channelName": "uptime",
       "verifyToken": ""
-    }
   },
   "autoRestart": {
     "time": null,
