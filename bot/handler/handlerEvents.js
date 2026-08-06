@@ -211,6 +211,7 @@ module.exports = function (api, threadModel, userModel, dashBoardModel, globalMo
 			+-----------------------------------------------+
 		*/
 		let isUserCallCommand = false;
+		let calledCommandName = null;
 		async function onStart() {
 			// —————————————— CHECK USE BOT —————————————— //
 			if (!body) return;
@@ -264,14 +265,7 @@ module.exports = function (api, threadModel, userModel, dashBoardModel, globalMo
 			
 			let { usePrefix = true } = command.config;
 const { enable: noPrefixEnable = false, ignoreCmds: noPrefixIgnoreCmds = [] } = config.noPrefix || {};
-// Commands that already have their own onChat / onFirstChat listener run on
-// EVERY message regardless of prefix. If we also force usePrefix = false for
-// them here, the same message ends up matching BOTH that listener AND
-// onStart() below, so the command replies twice. Skip those commands so
-// noPrefix only applies to commands that don't already listen passively.
-const hasOwnChatListener = GoatBot.onChat.includes(commandName)
-	|| GoatBot.onFirstChat.some(item => item.commandName === commandName);
-const globalNoPrefix = noPrefixEnable && !noPrefixIgnoreCmds.includes(commandName) && !hasOwnChatListener;
+const globalNoPrefix = noPrefixEnable && !noPrefixIgnoreCmds.includes(commandName);
 if (globalNoPrefix)
 	usePrefix = false;
 
@@ -311,6 +305,7 @@ if (usePrefix && !body.startsWith(prefix)) return;
 			// ——————————————— RUN COMMAND ——————————————— //
 			const time = getTime("DD/MM/YYYY HH:mm:ss");
 			isUserCallCommand = true;
+			calledCommandName = commandName;
 			try {
 				// analytics command call
 				(async () => {
@@ -347,6 +342,10 @@ if (usePrefix && !body.startsWith(prefix)) return;
 				if (!command)
 					continue;
 				const commandName = command.config.name;
+
+				// ———— SKIP: already handled by onStart (avoid double reply) ———— //
+				if (isUserCallCommand && commandName === calledCommandName)
+					continue;
 
 				// —————————————— CHECK PERMISSION —————————————— //
 				const roleConfig = getRoleConfig(utils, command, isGroup, threadData, commandName);
