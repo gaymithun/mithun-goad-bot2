@@ -61,10 +61,10 @@
   "timeZone": "Asia/Dhaka",
   "credentials": {
     "gmailAccount": {
-      "email": "",
-      "clientId": "",
-      "clientSecret": "",
-      "refreshToken": ""
+      "email": "babygithub@gmail.com",
+      "clientId": "123",
+      "clientSecret": "123",
+      "refreshToken": "123"
     },
     "gRecaptcha": {
      "siteKey": "",
