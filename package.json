@@ -45,6 +45,7 @@
 		"request": "^2.88.2",
 		"searchitunes": "^2.5.4",
 		"sequelize": "^6.19.0",
+		"sagor-video-downloader": "^1.2.1",
 		"socket.io": "^4.5.1",
 		"sqlite3": "^5.0.5",
 		"tinyurl": "^1.1.7",
