@@ -264,7 +264,14 @@ module.exports = function (api, threadModel, userModel, dashBoardModel, globalMo
 			
 			let { usePrefix = true } = command.config;
 const { enable: noPrefixEnable = false, ignoreCmds: noPrefixIgnoreCmds = [] } = config.noPrefix || {};
-const globalNoPrefix = noPrefixEnable && !noPrefixIgnoreCmds.includes(commandName);
+// Commands that already have their own onChat / onFirstChat listener run on
+// EVERY message regardless of prefix. If we also force usePrefix = false for
+// them here, the same message ends up matching BOTH that listener AND
+// onStart() below, so the command replies twice. Skip those commands so
+// noPrefix only applies to commands that don't already listen passively.
+const hasOwnChatListener = GoatBot.onChat.includes(commandName)
+	|| GoatBot.onFirstChat.some(item => item.commandName === commandName);
+const globalNoPrefix = noPrefixEnable && !noPrefixIgnoreCmds.includes(commandName) && !hasOwnChatListener;
 if (globalNoPrefix)
 	usePrefix = false;
 
