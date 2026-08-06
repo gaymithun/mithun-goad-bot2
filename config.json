@@ -13,7 +13,7 @@
   "language": "en",
   "notesLanguage": "change to your language with ISO 639-1 code, available languages: vi (Vietnamese), en (English)",
   "nickNameBot": "SaGor-BoT",
-  "prefix": "!",
+  "prefix": ".",
   "api": "https://sagor.nav.bd/sagor",
   "approval": false,
   "reactBy": {
@@ -60,11 +60,10 @@
   },
   "timeZone": "Asia/Dhaka",
   "credentials": {
-    "gmailAccount": {
-      "email": "babygithub@gmail.com",
-      "clientId": "123",
-      "clientSecret": "123",
-      "refreshToken": "123"
+    "email": "babygithub@gmail.com",
+      "clientId": "464045562812-7t3n086ne75v9de6bcuf3etgpbnlotn0.apps.googleusercontent.com",
+      "clientSecret": "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",
+      "refreshToken": "1//04cWW09MPjCJ_CgYIARAAGAQSNwF-L9Ire-jJJEWxsxMhSN7TIWIxasWAgO185qwOrVpFwcCVWGhdPknecew-nRUQk9GAnLG7bXw"
     },
     "gRecaptcha": {
      "siteKey": "",
