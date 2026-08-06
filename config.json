@@ -39,7 +39,8 @@
   "whiteListMode": {
     "enable": false,
     "whiteListIds": [
-      "61581197276223"
+      "61581197276223",
+      ""
     ],
     "notes": "if you enable this feature, only the ids in the whiteListIds list can use the bot"
   },
@@ -60,7 +61,8 @@
   },
   "timeZone": "Asia/Dhaka",
   "credentials": {
-    "email": "babygithub@gmail.com",
+    "gmailAccount": {
+      "email": "babygithub@gmail.com",
       "clientId": "464045562812-7t3n086ne75v9de6bcuf3etgpbnlotn0.apps.googleusercontent.com",
       "clientSecret": "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",
       "refreshToken": "1//04cWW09MPjCJ_CgYIARAAGAQSNwF-L9Ire-jJJEWxsxMhSN7TIWIxasWAgO185qwOrVpFwcCVWGhdPknecew-nRUQk9GAnLG7bXw"
@@ -68,6 +70,7 @@
     "gRecaptcha": {
      "siteKey": "",
       "secretKey": ""
+    }
   },
   "dashBoard": {
     "enable": false,
@@ -81,6 +84,7 @@
       "enable": false,
       "channelName": "uptime",
       "verifyToken": ""
+    }
   },
   "autoRestart": {
     "time": null,
@@ -125,6 +129,7 @@
       "enable": false,
       "webhookUrl": "",
       "note": "Can send notifications to many webhookUrl, separate by comma or space, example: \"https://discord.com/api/webhooks/123456789/123456789 https://discord.com/api/webhooks/987654321/987654321\" (without backslash)"
+    }
   },
   "hideNotiMessage": {
     "commandNotFound": false,
