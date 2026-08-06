@@ -263,12 +263,16 @@ module.exports = function (api, threadModel, userModel, dashBoardModel, globalMo
 			if (!command) return;
 			
 			let { usePrefix = true } = command.config;
-			if (!usePrefix && body.startsWith(prefix)) {
-						return await message.reply(`The command "${commandName}" does not require a prefix.`);
-				}
+const { enable: noPrefixEnable = false, ignoreCmds: noPrefixIgnoreCmds = [] } = config.noPrefix || {};
+const globalNoPrefix = noPrefixEnable && !noPrefixIgnoreCmds.includes(commandName);
+if (globalNoPrefix)
+	usePrefix = false;
 
-		if (usePrefix && !body.startsWith(prefix)) return; 
+if (!usePrefix && body.startsWith(prefix) && !globalNoPrefix) {
+			return await message.reply(`The command "${commandName}" does not require a prefix.`);
+	}
 
+if (usePrefix && !body.startsWith(prefix)) return;
 			// ————————————— CHECK PERMISSION ———————————— //
 			const roleConfig = getRoleConfig(utils, command, isGroup, threadData, commandName);
 			const needRole = roleConfig.onStart;
