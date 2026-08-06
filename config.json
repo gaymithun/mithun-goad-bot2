@@ -68,7 +68,6 @@
     "gRecaptcha": {
      "siteKey": "",
       "secretKey": ""
-    }
   },
   "dashBoard": {
     "enable": false,
@@ -127,7 +126,6 @@
       "enable": false,
       "webhookUrl": "",
       "note": "Can send notifications to many webhookUrl, separate by comma or space, example: \"https://discord.com/api/webhooks/123456789/123456789 https://discord.com/api/webhooks/987654321/987654321\" (without backslash)"
-    }
   },
   "hideNotiMessage": {
     "commandNotFound": false,
