@@ -114,6 +114,15 @@ function isBannedOrOnlyAdmin(userData, threadData, senderID, threadID, isGroup, 
 				message.reply(getText("threadBanned", reason, date, threadID, lang));
 			return true;
 		}
+
+		// check if member banned in this group
+		const bannedMembers = threadData.data.bannedMembers || [];
+		const infoBannedMember = bannedMembers.find(m => String(m.uid) === String(senderID));
+		if (infoBannedMember) {
+			if (!threadData.data.hideNotiMessageBannedMember)
+				message.reply(`❌ | You are banned from using the bot in this group.\nReason: ${infoBannedMember.reason || "No reason"}\nDate: ${infoBannedMember.date || ""}`);
+			return true;
+		}
 	}
 	return false;
 }
