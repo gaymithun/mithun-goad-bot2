@@ -50,21 +50,25 @@ if (!approvedtid.approved.includes(event.threadID)) return;
 				break;
 			case "message_reaction":
 				onReaction();
-				const { delete: del, kick } = global.GoatBot.config?.reactBy;
+				try {
+					const reactBy = global.GoatBot.config?.reactBy || {};
+					const del = Array.isArray(reactBy.delete) ? reactBy.delete : [];
+					const kick = Array.isArray(reactBy.kick) ? reactBy.kick : [];
 
-        if (del.includes(event.reaction)) {
-       if (event.senderID === api.getCurrentUserID()) {
-				 if ( global.GoatBot.config?.adminBot?.includes(event.userID)
-            ) {
-              api.unsendMessage(event.messageID);
-            }
-          }
-				}
-				if (kick.includes(event.reaction)){
-					if ( global.GoatBot.config?.adminBot?.includes(event.userID)
-            ) {
-				api.removeUserFromGroup(event.senderID, event.threadID, (err) => { if (err) return console.log(err) });
+					if (del.includes(event.reaction)) {
+						if (event.senderID === api.getCurrentUserID()) {
+							if (global.GoatBot.config?.adminBot?.includes(event.userID)) {
+								api.unsendMessage(event.messageID);
+							}
+						}
 					}
+					if (kick.includes(event.reaction)) {
+						if (global.GoatBot.config?.adminBot?.includes(event.userID)) {
+							api.removeUserFromGroup(event.senderID, event.threadID, (err) => { if (err) return console.log(err) });
+						}
+					}
+				} catch (err) {
+					console.log("[handlerAction] reactBy error:", err);
 				}
 				break;
 			case "typ":
